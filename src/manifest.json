@@ -1,15 +1,15 @@
 {
-    "name": "Getting Started Example",
+    "name": "Focused - Website Blocker and Pomodoro Timer",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "Start a timer, block those distracting websites and get working.",
     "permissions": ["activeTab", "declarativeContent", "storage"],
     "background": {
         "scripts": ["background.js"],
         "persistent": false
     },
-    "options_page": "options.html",
+    "options_page": "options/options.html",
     "page_action": {
-        "default_popup": "popup.html",
+        "default_popup": "popup/popup.html",
         "default_icon": {
             "16": "images/web_16x16.png",
             "32": "images/web_32x32.png",
