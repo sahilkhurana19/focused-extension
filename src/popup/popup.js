@@ -1,16 +1,21 @@
-let changeColor = document.getElementById('changeColor');
+let blockSiteButton = document.getElementById('block-site-button');
+let currentTab = {};
 
-chrome.storage.sync.get('color', function(data) {
-    changeColor.style.backgroundColor = data.color;
-    changeColor.setAttribute('value', data.color);
-});
+window.addEventListener("pageshow", getCurrentTabDetails())
 
-changeColor.onclick = function(element) {
-    let color = element.target.value;
-    chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-        chrome.tabs.executeScript(
-            tabs[0].id,
-            {code: 'document.body.style.backgroundColor = "' + color + '";'}
-        );
-    });
+function getCurrentTabDetails() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(data) {
+        currentTab = data[0];
+    })
+}
+
+blockSiteButton.onclick = function(element) {
+    let urlToBlock = new URL(currentTab.url);
+    blockSite(urlToBlock.origin);
 };
+
+function blockSite(websiteUrl) {
+    chrome.storage.sync.set({'blockedSite': websiteUrl}, function() {
+        console.log("Blocked", websiteUrl);
+    });
+}

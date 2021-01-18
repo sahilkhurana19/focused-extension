@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <style>
-            button {
-                height: 30px;
-                width: 30px;
-                outline: none;
-            }
-        </style>
+        <title>Focused Extension Settings</title>
+        <link rel="stylesheet" href="popup.css">
+        <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     </head>
     <body>
-        <button id="changeColor"></button>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h3 class="mainHeading">
+                        <b>Focused!</b>
+                    </h3>                    
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col text-center">
+                    <h6 class="subHeading">Block sites and get working</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn btn-primary" id="block-site-button">Block This Site!</button>
+                </div>
+            </div>
+        </div>
         <script src="popup.js"></script>
+        <script src="../static/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
