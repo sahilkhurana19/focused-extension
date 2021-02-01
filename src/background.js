@@ -1,14 +1,24 @@
 chrome.runtime.onInstalled.addListener(() => {
-    chrome.storage.sync.set({ color: '#3aa757' }, function() {
-        console.log("The color is green");
-    });
-    // chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-    //     chrome.declarativeContent.onPageChanged.addRules([{
-    //         conditions: [new chrome.declarativeContent.PageStateMatcher({
-    //             pageUrl: {hostEquals: 'developer.chrome.com'},
-    //         })
-    //     ],
-    //         actions: [new chrome.declarativeContent.ShowPageAction()]    
-    //     }]);
-    // });
+    chrome.storage.sync.get('blockedSites', function(data) {
+        if (!data.blockedSites) {
+            chrome.storage.sync.set({'blockedSites': []}, function() {
+                console.log("Initialised blocked sites memory");
+            });
+        }
+    })
 });
+
+chrome.webNavigation.onCommitted.addListener((data) => {
+    let websiteUrl = data.url;
+    let urlToBlock = new URL(websiteUrl);
+    let urlOrigin = urlToBlock.origin;
+    chrome.storage.sync.get('blockedSites', function(data) {
+        blockedSites = data.blockedSites;
+        console.log(blockedSites);
+        if (blockedSites) {
+            if (blockedSites.indexOf(urlOrigin) > -1) {
+                window.location = "https://www.google.com"
+            }
+        }
+    })
+})

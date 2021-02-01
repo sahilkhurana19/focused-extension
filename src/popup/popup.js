@@ -1,21 +1,51 @@
 let blockSiteButton = document.getElementById('block-site-button');
 let currentTab = {};
+let blockedSites = [];
+let urlToBlock = "";
+let urlOrigin = ""
 
 window.addEventListener("pageshow", getCurrentTabDetails())
 
 function getCurrentTabDetails() {
     chrome.tabs.query({active: true, currentWindow: true}, function(data) {
         currentTab = data[0];
+        websiteUrl = currentTab.url;
+        urlToBlock = new URL(currentTab.url);
+        urlOrigin = urlToBlock.origin;
+        chrome.storage.sync.get('blockedSites', function(data) {
+            blockedSites = data.blockedSites;
+            if (blockedSites) {
+                if (blockedSites.indexOf(urlOrigin) > -1) {
+                    document.getElementById('block-disabled-button').style.display = "block";
+                    document.getElementById('block-site-button').style.display = "none";
+                    
+                } else {
+                    document.getElementById('block-disabled-button').style.display = "none";
+                    document.getElementById('block-site-button').style.display = "block";
+                }
+            }
+            else {
+                blockedSites = [];
+                blockedSites.push(websiteUrl)
+            }
+        })
     })
 }
 
 blockSiteButton.onclick = function(element) {
-    let urlToBlock = new URL(currentTab.url);
-    blockSite(urlToBlock.origin);
+    blockSite(urlOrigin);
 };
 
-function blockSite(websiteUrl) {
-    chrome.storage.sync.set({'blockedSite': websiteUrl}, function() {
-        console.log("Blocked", websiteUrl);
-    });
+async function blockSite(websiteUrl) {
+    chrome.storage.sync.get('blockedSites', function(data) {
+        blockedSites = data.blockedSites;
+        if (blockedSites) blockedSites.push(websiteUrl);
+        else {
+            blockedSites = [];
+            blockedSites.push(websiteUrl)
+        }
+        chrome.storage.sync.set({'blockedSites': blockedSites}, function() {
+            console.log(blockedSites);
+        });
+    })
 }
