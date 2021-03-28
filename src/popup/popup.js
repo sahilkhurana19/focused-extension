@@ -11,17 +11,17 @@ function getCurrentTabDetails() {
         currentTab = data[0];
         websiteUrl = currentTab.url;
         urlToBlock = new URL(currentTab.url);
-        urlOrigin = urlToBlock.origin;
+        urlOrigin = urlToBlock.host;
         chrome.storage.sync.get('blockedSites', function(data) {
             blockedSites = data.blockedSites;
             if (blockedSites) {
                 if (blockedSites.indexOf(urlOrigin) > -1) {
-                    document.getElementById('block-disabled-button').style.display = "block";
+                    document.getElementById('block-disabled-button').style.display = "inline-block";
                     document.getElementById('block-site-button').style.display = "none";
                     
                 } else {
                     document.getElementById('block-disabled-button').style.display = "none";
-                    document.getElementById('block-site-button').style.display = "block";
+                    document.getElementById('block-site-button').style.display = "inline-block";
                 }
             }
             else {

@@ -3,14 +3,16 @@
     "version": "1.0",
     "description": "Start a timer, block those distracting websites and get working. One more thing - Its free and opensource. :)",
     "permissions": [
+        "background",
         "activeTab",
         "declarativeContent",
         "storage",
-        "webNavigation"
+        "webRequest",
+        "webRequestBlocking",
+        "*://*/*"
     ],
     "background": {
-        "scripts": ["background.js"],
-        "persistent": false
+        "scripts": ["background.js"]
     },
     "options_page": "options/options.html",
     "browser_action": {

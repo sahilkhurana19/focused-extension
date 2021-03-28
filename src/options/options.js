@@ -6,4 +6,8 @@ function fetchBlockedSites() {
     })
 }
 
+document.getElementById("clear-memory-button").onclick = function clearMemory() {
+    chrome.storage.sync.clear();
+}
+
 fetchBlockedSites();
