@@ -7,7 +7,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.tabs.onUpdated.addListener(
     function(tabId, changeInfo, tab) {
         fetchBlockedSitesList();
-        if (changeInfo && changeInfo.status === "loading") {
+        if (changeInfo && changeInfo.status === "loading" && tab.url) {
             let url = new URL(tab.url);
             if (blockedSites && blockedSites.indexOf(url.host) != -1) {
                 chrome.tabs.query({currentWindow: true, active: true}, function (tab) {

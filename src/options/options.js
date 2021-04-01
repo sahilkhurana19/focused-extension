@@ -1,7 +1,7 @@
 function fetchBlockedSites() {
     chrome.storage.sync.get('blockedSites', function(data) {
         let listDom = document.getElementById("blocked-sites-list");
-        if (data.blockedSites) {
+        if (data.blockedSites && data.blockedSites.length > 0) {
             data.blockedSites.forEach(element => {
                 let siteRow = document.createElement("div")
                 customiseSiteRow(siteRow);
@@ -27,21 +27,22 @@ function fetchBlockedSites() {
 
                 listDom.appendChild(siteRow);
             });
-        console.log(data);
+        } else {
+            handleEmptyList()
         }
     })
 }
 
 function customiseSiteRow(siteRow) {
-    siteRow.classList = "row";
+    siteRow.classList = "row site-row";
 }
 
 function customiseSiteNameCol(siteNameCol) {
-    siteNameCol.classList = "col-3";
+    siteNameCol.classList = "col-10 site-name-container";
 }
 
 function customiseDeleteButtonCol(deleteButtonCol) {
-    deleteButtonCol.classList = "col-3";
+    deleteButtonCol.classList = "col-2 delete-button-container";
 }
 
 function customiseDeleteButton(deleteButton) {
@@ -49,8 +50,14 @@ function customiseDeleteButton(deleteButton) {
     deleteButton.classList = "btn btn-danger";
 }
 
+function handleEmptyList() {
+    document.getElementById("clear-memory-button").classList.add("hidden");
+    document.getElementById("empty-list-container").classList.remove("hidden");
+}
+
 document.getElementById("clear-memory-button").onclick = function clearMemory() {
     chrome.storage.sync.clear();
+    window.location.reload()
 }
 
 fetchBlockedSites();

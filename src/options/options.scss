@@ -1,0 +1,16 @@
+.blocked-sites-container {
+    border-right: 1px solid black;
+    min-height: 60vh;
+
+    .site-row {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        .delete-button-container {
+            text-align: right;
+        }
+    }
+}
+
+.hidden {
+    display: none !important;
+}

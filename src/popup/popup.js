@@ -45,7 +45,9 @@ async function blockSite(websiteUrl) {
             blockedSites.push(websiteUrl)
         }
         chrome.storage.sync.set({'blockedSites': blockedSites}, function() {
-            console.log(blockedSites);
+            chrome.tabs.query({currentWindow: true, active: true}, function (tab) {
+                chrome.tabs.update(tab.id, {url: `chrome-extension://${chrome.runtime.id}/blocked/blocked.html`});
+            });
         });
     })
 }
