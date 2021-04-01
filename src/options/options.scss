@@ -14,3 +14,12 @@
 .hidden {
     display: none !important;
 }
+
+#version-text {
+    font-size: 10px;
+    text-align: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 0px;
+}
