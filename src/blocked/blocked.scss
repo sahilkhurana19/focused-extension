@@ -1,7 +1,15 @@
 #blocked-bold-container {
-    height: 100vh;
+    height: 80vh;
 }
 
 #blocked-bold-text {
     font-size: 10em;
+}
+
+#settings-button-container {
+    text-align: right;
+    #settings-button {
+        background: white;
+        border: 1px solid black;
+    }
 }

@@ -1,4 +1,5 @@
 let blockSiteButton = document.getElementById('block-site-button');
+let settingsIcon = document.getElementById('settings-icon')
 let currentTab = {};
 let blockedSites = [];
 let urlToBlock = "";
@@ -49,5 +50,12 @@ async function blockSite(websiteUrl) {
                 chrome.tabs.update(tab.id, {url: `chrome-extension://${chrome.runtime.id}/blocked/blocked.html`});
             });
         });
+    })
+}
+
+settingsIcon.onclick = function (element) {
+    chrome.tabs.create({
+        active: true,
+        url: `chrome-extension://${chrome.runtime.id}/options/options.html`
     })
 }
