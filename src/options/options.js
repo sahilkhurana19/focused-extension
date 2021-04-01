@@ -15,7 +15,7 @@ function fetchBlockedSites() {
                 customiseDeleteButtonCol(deleteButtonCol);
 
                 let deleteButton = document.createElement("button")
-                customiseDeleteButton(deleteButton)
+                customiseDeleteButton(deleteButton, element)
 
                 siteName.innerText = element;
 
@@ -45,14 +45,34 @@ function customiseDeleteButtonCol(deleteButtonCol) {
     deleteButtonCol.classList = "col-2 delete-button-container";
 }
 
-function customiseDeleteButton(deleteButton) {
+function customiseDeleteButton(deleteButton, url) {
     deleteButton.innerHTML = `<i class="fa fa-trash"></i>`;
     deleteButton.classList = "btn btn-danger";
+    deleteButton.setAttribute("data-url", url);
+    deleteButton.addEventListener("click", () => {
+        removeWebsiteFromList(url);
+    });
 }
 
 function handleEmptyList() {
     document.getElementById("clear-memory-button").classList.add("hidden");
     document.getElementById("empty-list-container").classList.remove("hidden");
+}
+
+function removeWebsiteFromList(url) {
+    chrome.storage.sync.get('blockedSites', function(data) {
+        if (data && data.blockedSites && data.blockedSites.length > 0) {
+            let blockedSites = data.blockedSites;
+            let newList = blockedSites.filter((element) => element !== url);
+            storeNewList(newList);
+        }
+    })
+}
+
+function storeNewList(newList) {
+    chrome.storage.sync.set({'blockedSites': newList}, function() {
+        window.location.reload();
+    })
 }
 
 document.getElementById("clear-memory-button").onclick = function clearMemory() {

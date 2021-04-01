@@ -7,8 +7,6 @@
         "activeTab",
         "declarativeContent",
         "storage",
-        "webRequest",
-        "webRequestBlocking",
         "*://*/*"
     ],
     "background": {
@@ -18,17 +16,17 @@
     "browser_action": {
         "default_popup": "popup/popup.html",
         "default_icon": {
-            "16": "static/images/web_16x16.png",
-            "32": "static/images/web_32x32.png",
-            "48": "static/images/web_48x48.png",
-            "128": "static/images/web_128x128.png"
+            "16": "static/images/icon/blocked_16x16.png",
+            "32": "static/images/icon/blocked_32x32.png",
+            "48": "static/images/icon/blocked_64x64.png",
+            "128": "static/images/icon/blocked_128x128.png"
         }
     },
     "icons": {
-        "16": "static/images/web_16x16.png",
-        "32": "static/images/web_32x32.png",
-        "48": "static/images/web_48x48.png",
-        "128": "static/images/web_128x128.png"
+        "16": "static/images/icon/blocked_16x16.png",
+        "32": "static/images/icon/blocked_32x32.png",
+        "48": "static/images/icon/blocked_64x64.png",
+        "128": "static/images/icon/blocked_128x128.png"
     },
     "manifest_version": 2
 }
