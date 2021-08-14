@@ -9,7 +9,10 @@ module.exports = {
     'eslint:recommended'
   ],
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    ecmaFeatures: {
+      legacyDecorators: true
+    }
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

@@ -1,17 +1,18 @@
 {
   "manifest_version": 2,
-  "name": "__MSG_extName__",
-  "homepage_url": "http://localhost:8080/",
-  "description": "A Vue Browser Extension",
+  "name": "Focused - Website Blocker",
+  "homepage_url": "https://www.github.com/sahilkhurana19/focused-extension",
+  "description": "A free and open source website blocker. Now block those distracting websites and smash your goals!",
   "default_locale": "en",
   "permissions": [
-    "<all_urls>",
-    "*://*/*"
+    "storage",
+    "tabs"
   ],
   "icons": {
-    "16": "icons/16.png",
-    "48": "icons/48.png",
-    "128": "icons/128.png"
+    "16": "icons/blocked_16x16.png",
+    "32": "icons/blocked_32x32.png",
+    "48": "icons/blocked_64x64.png",
+    "128": "icons/blocked_128x128.png"
   },
   "background": {
     "scripts": [
@@ -21,14 +22,12 @@
   },
   "browser_action": {
     "default_popup": "popup.html",
-    "default_title": "__MSG_extName__",
     "default_icon": {
-      "19": "icons/19.png",
-      "38": "icons/38.png"
+      "16": "icons/blocked_16x16.png",
+      "32": "icons/blocked_32x32.png",
+      "48": "icons/blocked_64x64.png",
+      "128": "icons/blocked_128x128.png"
     }
   },
-  "options_ui": {
-    "page": "options.html",
-    "browser_style": true
-  }
+  "options_page": "options.html"
 }

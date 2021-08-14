@@ -9,11 +9,6 @@ export default {
   name: 'HelloWorld',
   mounted () {
     browser.runtime.sendMessage({})
-  },
-  computed: {
-    defaultText () {
-      return browser.i18n.getMessage('extName')
-    }
   }
 }
 </script>
