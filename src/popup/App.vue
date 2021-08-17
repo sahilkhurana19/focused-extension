@@ -45,7 +45,6 @@ export default class PopupPage extends Vue {
     getCurrentTabDetails() {
         chrome.tabs.query({active: true, currentWindow: true}, function(data) {
         let currentTab = data[0];
-        // let websiteUrl = currentTab.url;
         let urlToBlock = new URL(currentTab.url);
         this.urlOrigin = urlToBlock.host;
         chrome.storage.sync.get('blockedSites', function(data) {
