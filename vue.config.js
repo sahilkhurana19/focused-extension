@@ -9,6 +9,11 @@ module.exports = {
       template: 'public/browser-extension.html',
       entry: './src/options/main.js',
       title: 'Options'
+    },
+    blocked: {
+      template: 'public/browser-extension.html',
+      entry: './src/pages/blocked/main.js',
+      title: 'Blocked'
     }
   },
   pluginOptions: {

@@ -11,7 +11,7 @@ chrome.tabs.onUpdated.addListener(
             let url = new URL(tab.url);
             if (blockedSites && blockedSites.indexOf(url.host) != -1) {
                 chrome.tabs.query({currentWindow: true, active: true}, function (tab) {
-                    chrome.tabs.update(tab.id, {url: `chrome-extension://${chrome.runtime.id}/options.html`});
+                    chrome.tabs.update(tab.id, {url: `chrome-extension://${chrome.runtime.id}/blocked.html`});
                 });
             }
         }
