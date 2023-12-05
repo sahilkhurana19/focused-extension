@@ -5,7 +5,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 chrome.tabs.onUpdated.addListener(
-    function(tabId, changeInfo, tab) {
+    function(changeInfo, tab) {
         fetchBlockedSitesList();
         if (changeInfo && changeInfo.status === "loading" && tab.url) {
             let url = new URL(tab.url);
